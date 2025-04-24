@@ -25,7 +25,6 @@ const TopicsChart = ({ data, isLoading }: TopicsChartProps) => {
         }
       });
       
-      // Take top topics
       setSortedTopics(sorted.slice(0, 10));
     }
   }, [data, sortBy]);

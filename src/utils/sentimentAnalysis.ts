@@ -1,7 +1,6 @@
 
 import { NewsArticle, SentimentData, SourceDistribution, TopicTrend, CategoryDistribution } from "../types/news";
 
-// Simple sentiment analysis based on common positive and negative words
 const POSITIVE_WORDS = [
   "good", "great", "excellent", "positive", "success", "win", "happy", "best", 
   "hope", "improve", "better", "rise", "growth", "progress", "advance", "gain",
@@ -14,7 +13,7 @@ const NEGATIVE_WORDS = [
   "threat", "warning", "crash", "disaster", "conflict", "accident", "violence"
 ];
 
-// Topic extraction based on common topics
+
 const TOPICS = {
   "politics": ["president", "government", "election", "congress", "senate", "democrat", "republican", "policy", "vote"],
   "technology": ["tech", "apple", "google", "microsoft", "ai", "artificial intelligence", "software", "app", "device", "digital"],
@@ -31,7 +30,6 @@ export function analyzeSentiment(text: string): number {
   const lowercaseText = text.toLowerCase();
   let score = 0;
   
-  // Count positive words
   POSITIVE_WORDS.forEach(word => {
     const regex = new RegExp(`\\b${word}\\b`, 'g');
     const matches = lowercaseText.match(regex);
@@ -40,7 +38,6 @@ export function analyzeSentiment(text: string): number {
     }
   });
   
-  // Count negative words
   NEGATIVE_WORDS.forEach(word => {
     const regex = new RegExp(`\\b${word}\\b`, 'g');
     const matches = lowercaseText.match(regex);
@@ -49,7 +46,7 @@ export function analyzeSentiment(text: string): number {
     }
   });
   
-  // Normalize score between -1 and 1
+
   const normalizedScore = Math.max(-1, Math.min(1, score / 5));
   return normalizedScore;
 }
@@ -99,11 +96,11 @@ export function getSourceDistribution(articles: NewsArticle[]): SourceDistributi
     }
   });
   
-  // Convert to array and sort by count
+  
   return Object.entries(sourceCounts)
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
-    .slice(0, 10); // Top 10 sources
+    .slice(0, 10);
 }
 
 export function getTrendingTopics(articles: NewsArticle[]): TopicTrend[] {
@@ -123,7 +120,7 @@ export function getTrendingTopics(articles: NewsArticle[]): TopicTrend[] {
     });
   });
   
-  // Convert to array and calculate average sentiment
+  
   return Object.entries(topicCounts)
     .map(([topic, { count, sentimentSum }]) => ({
       topic,

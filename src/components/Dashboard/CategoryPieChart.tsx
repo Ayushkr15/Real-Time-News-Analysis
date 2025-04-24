@@ -11,7 +11,7 @@ interface CategoryPieChartProps {
 const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f97316', '#10b981', '#eab308', '#ef4444', '#94a3b8'];
 
 const CategoryPieChart = ({ data, isLoading }: CategoryPieChartProps) => {
-  // Don't show categories with zero values
+  
   const filteredData = data.filter(item => item.value > 0);
   
   return (

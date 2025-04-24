@@ -30,7 +30,6 @@ export async function fetchTopHeadlines(
       throw new Error(`API error: ${data.error.message}`);
     }
 
-    // Transform mediastack response to match NewsApiResponse structure
     return {
       status: "ok",
       totalResults: data.pagination?.total || 0,
@@ -107,7 +106,7 @@ export async function fetchEverything(
   }
 }
 
-// Supported countries (2-letter codes) from mediastack docs
+//  Country 2 digit code
 export const NEWS_COUNTRIES = [
   "af",
   "al",
