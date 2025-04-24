@@ -1,6 +1,6 @@
 import { NewsApiResponse } from "../types/news";
 
-const API_KEY = "10b7b7086ace3f28a80bc28fc2e394ee";
+const API_KEY = import.meta.env.VITE_MEDIASTACK_API_KEY;
 const BASE_URL = "http://api.mediastack.com/v1";
 
 export async function fetchTopHeadlines(
