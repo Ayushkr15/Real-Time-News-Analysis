@@ -1,9 +1,14 @@
-
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { NEWS_CATEGORIES } from "@/services/newsApi";
-import { Globe, RefreshCw } from "lucide-react";
+import { Globe, RefreshCw, ExternalLink } from "lucide-react"; // Added ExternalLink icon
 
 interface DashboardHeaderProps {
   onRefresh: () => void;
@@ -15,14 +20,14 @@ interface DashboardHeaderProps {
   availableCountries: Record<string, string>;
 }
 
-const DashboardHeader = ({ 
-  onRefresh, 
-  isLoading, 
-  onCategoryChange, 
+const DashboardHeader = ({
+  onRefresh,
+  isLoading,
+  onCategoryChange,
   onCountryChange,
   selectedCategory,
   selectedCountry,
-  availableCountries
+  availableCountries,
 }: DashboardHeaderProps) => {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
@@ -35,7 +40,9 @@ const DashboardHeader = ({
   return (
     <div className="flex flex-wrap justify-between items-center mb-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">News Trend Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          News Trend Dashboard
+        </h1>
         <p className="text-muted-foreground mt-1">
           Real-Time Topic Modeling and Analysis for News Articles
         </p>
@@ -65,7 +72,7 @@ const DashboardHeader = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Categories</SelectItem>
-            {NEWS_CATEGORIES.map((category) => (
+            {NEWS_CATEGORIES.map(category => (
               <SelectItem key={category} value={category}>
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </SelectItem>
@@ -73,8 +80,22 @@ const DashboardHeader = ({
           </SelectContent>
         </Select>
         <Button onClick={onRefresh} disabled={isLoading}>
-          <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`} />
+          <RefreshCw
+            className={`h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`}
+          />
           Refresh
+        </Button>
+        {/* New ETL Pipeline button */}
+        <Button variant="outline" asChild>
+          <a
+            href="https://real-time-news-etl-pipeline.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center"
+          >
+            <ExternalLink className="h-4 w-4 mr-2" />
+            ETL Pipeline
+          </a>
         </Button>
       </div>
     </div>
